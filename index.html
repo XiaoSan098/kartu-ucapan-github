@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Kartu Ucapan Lebaran</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            background-image: url('manis.jpeg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+
+        .card {
+            background-color: rgba(255, 240, 245, 0.9);
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 80%;
+            max-width: 700px;
+            animation: fadeIn 2s ease;
+            position: relative;
+            margin: 50px auto;
+            z-index: 1;
+        }
+
+        h1 {
+            color: #FF69B4;
+            font-size: 2.5rem;
+            animation: bounce 2s infinite;
+        }
+
+        p {
+            color: #FF1493;
+            font-size: 1.2rem;
+            transition: opacity 1s;
+        }
+
+        #typingMessage {
+            color: #FF1493;
+            font-size: 1.2rem;
+            white-space: pre-wrap;
+            margin-top: 20px;
+            visibility: hidden;
+        }
+
+        button {
+            background-color:rgb(237, 214, 218);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        button:hover {
+            background-color: #FF69B4;
+        }
+
+        .flower {
+            position: absolute;
+            top: -10px;
+            animation: fall 5s infinite;
+            pointer-events: none;
+            width: 30px;
+            height: 30px;
+            z-index: 0;
+        }
+
+        .image-row {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .image-row img {
+            width: 150px;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(-100px); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateY(100vh); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1 id="title">✨🌹Selamat Hari Raya Idul Fitri Diana Fitria🌹✨</h1>
+        <div class="image-row">
+            <img src="diana.jpg" alt="Diana 1">
+            <img src="dianadua.jpg" alt="Diana 2">
+            <img src="bungadiana.jpg" alt="Bunga Diana">
+        </div>
+        <p id="message">Taqabbalallahu minna wa minkum. Mohon maaf lahir dan batin, yah Di😇✨! Maaf jika dulu sampai sekarang aku punya banyak salah yang disengaja maupun tak disengaja yah hehe 😅🙏🏼. Nantikan kejutan yang bakal datang nantinya yah!😜</p>
+
+        <button onclick="showSurprise()">Klik di sini untuk kejutan!</button>
+        <div id="typingMessage"></div>
+    </div>
+
+    <audio id="backgroundMusic" src="Jaz-Bersamamu.mp3" loop autoplay></audio>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const music = document.getElementById("backgroundMusic");
+            music.play();
+
+            setInterval(() => {
+                let flower = document.createElement('img');
+                flower.src = 'flower.jpeg';
+                flower.className = 'flower';
+                flower.style.left = Math.random() * 100 + 'vw';
+                flower.style.animationDuration = (Math.random() * 3 + 3) + 's';
+                document.body.appendChild(flower);
+
+                setTimeout(() => { flower.remove(); }, 6000);
+            }, 500); 
+        });
+
+        function showSurprise() {
+            const message = document.getElementById("message");
+            message.innerHTML += "<br><br>Mohon Maaf Lahir Batin Diana😇🙏🏼✨";
+            message.style.opacity = "0";
+            setTimeout(() => { 
+                message.style.opacity = "1"; 
+                message.scrollIntoView({ behavior: 'smooth', block: 'end' });
+            }, 100);
+            alert("✨🙏🏼😇Mohon Maaf Lahir Batin Diana😇🙏🏼✨");
+            typingEffect();
+        }
+
+        function typingEffect() {
+            const typingMessage = document.getElementById("typingMessage");
+            const text = "Di, aku selalu berharap kita bisa selalu bersama suatu saat nanti..\nApapun halangan dan rintangannya bakal aku lewati..\nApapun konsekuensi dan hasil akhir nantinya bakal aku terima..\nSehat Selalu Yah Diana Fitria dan Sekeluarga 😇🙏🏼❤️";
+            let index = 0;
+            typingMessage.innerHTML = "";
+            typingMessage.style.visibility = "visible";
+
+            function type() {
+                if (index < text.length) {
+                    typingMessage.innerHTML += text.charAt(index);
+                    index++;
+                    setTimeout(type, 100);
+                }
+            }
+
+            type();
+        }
+    </script>
+</body>
+</html>
